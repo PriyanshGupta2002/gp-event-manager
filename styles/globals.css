@@ -11,7 +11,7 @@
 }
 
 body {
-  background: rgba(0,0,0, 0.9);
+  background: #191919;
   font-family: 'Inter', sans-serif;
 }
 .logo:hover {
@@ -26,6 +26,9 @@ body {
 }
 .green_gradient{
   @apply bg-gradient-to-r from-green-400 to-green-600 text-transparent bg-clip-text
+}
+.orange_gradient{
+  @apply bg-gradient-to-r from-amber-500 via-orange-600 to-yellow-500 bg-clip-text text-transparent;
 }
 .custom-bg {
   background-color: rgba(255, 255, 255, 0.2);
@@ -388,4 +391,37 @@ svg{
 
 .btn:hover svg {
   transform: translateY(-50%) rotate(-90deg);
+}
+
+/* .layout{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+} */
+
+.backdrop{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.form_bg{
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  padding: 20px;;
+}
+.glassmorphism{
+  backdrop-filter: blur(18px) saturate(42%);
+  -webkit-backdrop-filter: blur(18px) saturate(42%);
+  background-color: rgba(17, 25, 40, 0.51);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.125);
 }

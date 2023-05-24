@@ -1,4 +1,3 @@
-"use client"
 import React from 'react'
 import EventItem from './Event'
 import ContentWrapper from './ContentWrapper'

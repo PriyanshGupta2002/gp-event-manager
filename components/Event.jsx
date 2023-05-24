@@ -1,4 +1,3 @@
-"use client"
 import React from 'react'
 import Image from 'next/image'
 
@@ -8,7 +7,7 @@ const EventItem = ({event}) => {
      const options = { day: 'numeric', month: 'long', year: 'numeric' };
      const formattedDate = eventDate.toLocaleDateString('en-US', options);
   return (
-    <div className="w-full sm:w-[550px] md:w-[328px] flex flex-col gap-[15px] bg-[#ffffff33] backdrop-filter backdrop-blur-sm overflow-hidden rounded-xl">
+    <div className="w-full sm:w-[550px] md:w-[328px] flex flex-col gap-[15px] glassmorphism overflow-hidden rounded-xl">
     <div className="top">
       <img
         className='w-full object-contain'
@@ -54,7 +53,7 @@ const EventItem = ({event}) => {
       </div>
       
       <div className="text-[#efefef] font-medium text-">
-        Venue - <span className='font-semibold'>{address}</span>
+        Venue - <span className='font-semibold'>{address.substring(0,40)}...</span>
       </div>
 
       <div className="flex flex-col gap-[10px]">

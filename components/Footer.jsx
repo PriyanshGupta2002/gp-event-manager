@@ -8,7 +8,7 @@ const Footer = () => {
   return (
     <footer className='bg-[#222222] py-10'>
         <ContentWrapper key={"1"} className=' flex-col gap-10  md:flex-wrap justify-start md:flex-row max-w-[1086px]  md:justify-between  px-5  lg:px-0'>
-        <Link href="/"> <div className="blue_gradient font-extrabold lg:text-3xl cursor-pointer transition-all ease-linear text-2xl logo ">
+        <Link href="/"> <div className="blue_gradient font-extrabold lg:text-3xl cursor-pointer transition-all ease-linear text-3xl logo ">
         GpEvents.
       </div> </Link>
 

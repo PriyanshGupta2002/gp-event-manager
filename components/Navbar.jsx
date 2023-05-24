@@ -22,7 +22,7 @@ const Navbar = () => {
   return (
     <nav className="flex  items-center justify-between p-4 custom-bg bg-opacity-20 backdrop-filter backdrop-blur-lg  sticky top-0 z-50">
 
-     <Link href="/"> <div className="blue_gradient font-extrabold lg:text-3xl cursor-pointer transition-all ease-linear text-xl md:text-2xl  ">
+     <Link href="/"> <div className="blue_gradient font-extrabold lg:text-3xl cursor-pointer transition-all ease-linear text-3xl md:text-2xl  ">
         GpEvents.
       </div> </Link>
 
@@ -57,6 +57,7 @@ const Navbar = () => {
                 <span onClick={()=>{
                   router.push('/addEvent')
                   setShowMenu(false)
+                  setSearch(false)
                 }}>
                   Add Event
                 </span>
