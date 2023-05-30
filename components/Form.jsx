@@ -42,15 +42,16 @@ const Form = ({type,handleSubmit,handleChange,formData,handleImageChange,removeI
             </span>}
             {formData.image && <span className='text-white bg-neutral-800 py-1 px-2 cursor-pointer' onClick={removeImage}>X</span>}
             </div>
-           {showbackdrop && <Backdrop
-            setShowBackdrop={setShowBackdrop}
-            image={formData.image}
-            />}
+         
           </div>
           <button type='submit' disabled={isSubmitting}  className={`p-2 ${isSubmitting?"bg-stone-600 text-gray-400 cursor-not-allowed":"bg-[#238636] text-white hover:bg-[#2ea043]"}  rounded-xl text-xl  font-bold `}>
                {isSubmitting?`${type}ing Event...`:`${type} Event`}
           </button>
         </form>
+        {showbackdrop && <Backdrop
+            setShowBackdrop={setShowBackdrop}
+            image={formData.image}
+            />}
     </section>
   )
 }

@@ -1,20 +1,38 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
+import axios from 'axios'
+import { useRouter } from 'next/navigation'
 
-const EventItem = ({event}) => {
+const EventItem = ({event,type}) => {
     const {name,desc,image,organisedBy,address,date} = event
+    const router = useRouter()
      const eventDate = date ? new Date(date):new Date()
      const options = { day: 'numeric', month: 'long', year: 'numeric' };
      const formattedDate = eventDate.toLocaleDateString('en-US', options);
+     const [isDeleting, setisDeleting] = useState(false)
+     const handleDeleteMeetup=async()=>{
+      setisDeleting(true)
+        try {
+          await axios.delete(`/api/meetups/delete/${event._id}`)
+          router.push('/')
+          setisDeleting(false)
+        } catch (error) {
+          setisDeleting(false)
+          console.log(error)
+        }
+     }
   return (
     <div className="w-full sm:w-[550px] md:w-[328px] flex flex-col gap-[15px] glassmorphism overflow-hidden rounded-xl">
+      <Link href={`/eventDetail/${event._id}`}>
     <div className="top">
-      <img
-        className='w-full object-contain'
+       <img
+        className='w-full object-cover md:h-52'
         src={image} 
         alt="image"
         />
     </div>
+        </Link>
 
 
     <div className="flex flex-col gap-3 p-3">
@@ -28,7 +46,7 @@ const EventItem = ({event}) => {
           Organiser
         </span>
 
-        <div className='flex items-center gap-2'>
+        <Link href={`/profile/${organisedBy?._id}`}><div className='flex items-center flex-row-reverse gap-2'>
         <span className='text-white font-semibold'>
           {organisedBy?.username}
         </span>
@@ -40,6 +58,7 @@ const EventItem = ({event}) => {
         src={organisedBy?.image}
         />
         </div>
+        </Link> 
 
         </div>
 
@@ -67,10 +86,18 @@ const EventItem = ({event}) => {
         </p>
 
       </div>
+     
       <button className="button">
+      {/* <Link href={`/eventDetail/${event._id}`}> */}
+        <Link href={`/eventDetail/${event._id}`}>
         <span className="button-content">Know More</span>
+        </Link>
       </button>
-
+      
+      {type && <div className='flex items-center gap-4 p-2'>
+          <button className=' border-2 rounded-lg border-[#238636] hover:bg-transparent hover:text-[#238636] bg-[#238636] px-4 py-1 text-white'>Edit</button>
+          <button className='border-2 rounded-lg border-red-600 text-red-500 px-2 py-1 hover:bg-red-600 hover:text-white' onClick={handleDeleteMeetup}>{isDeleting?"Deleting...":"Delete"}</button>
+      </div> }
     </div>
 
 
