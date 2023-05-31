@@ -28,9 +28,12 @@ const Navbar = () => {
     }
   }
 
-  const handleMobileSearch=()=>{
-    router.push(`/?search=${searchTerm.current.value}`)
-    searchTerm.current.value=""
+  const handleMobileSearch=(e)=>{
+    if (e.key==="Enter") {
+      router.push(`/?search=${searchTerm.current.value}`)
+      searchTerm.current.value=""
+    }
+   
   }
 
 
@@ -47,10 +50,9 @@ const Navbar = () => {
           type="text"
           placeholder="Search here for events..."
           ref={searchTerm}
+          onKeyDown={handleMobileSearch}
+
         />
-        <button className="mr-2" onClick={handleMobileSearch}>
-          🔎
-        </button>
         <button className="mr-3 font-medium cursor-pointer text-[#efefef]" onClick={()=>setSearch(false)}>
             X
         </button>
