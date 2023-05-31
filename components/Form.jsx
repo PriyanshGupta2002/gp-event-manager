@@ -19,23 +19,23 @@ const Form = ({type,handleSubmit,handleChange,formData,handleImageChange,removeI
         <form action="" className='flex flex-col glassmorphism p-4 gap-7 rounded-lg' onSubmit={handleSubmit}>
           <div className='flex flex-col gap-1'>
               <label htmlFor="name" className=' font-semibold text-zinc-300 '>Event Name</label>
-              <input className='focus:border-[3px] border-[3px] border-white focus:border-pink-400 focus:ring-pink-400 focus:outline-none px-4 py-2 rounded-2xl'  value={formData.name} type="text" name='name' onChange={handleChange}  required />
+              <input className='focus:border-[3px] border-[3px] border-white focus:border-pink-400 focus:ring-pink-400 focus:outline-none px-4 py-2 rounded-2xl'  value={formData.name || ""} type="text" name='name' onChange={handleChange}  required />
           </div>
           <div className='flex flex-col gap-1'>
               <label htmlFor="address" className=' font-semibold text-zinc-300 '>Address</label>
-              <input className='focus:border-[3px] border-[3px] border-white focus:border-pink-400 focus:ring-pink-400 focus:outline-none px-4 py-2 rounded-2xl' value={formData.address} type="text" name='address' onChange={handleChange}  required />
+              <input className='focus:border-[3px] border-[3px] border-white focus:border-pink-400 focus:ring-pink-400 focus:outline-none px-4 py-2 rounded-2xl' value={formData.address  || ""} type="text" name='address' onChange={handleChange}  required />
           </div>
           <div className='flex flex-col gap-1'>
               <label htmlFor="date" className=' font-semibold text-zinc-300 '>Date</label>
-              <input className='focus:border-[3px] border-[3px] border-white focus:border-pink-400 focus:ring-pink-400 focus:outline-none px-4 py-2 rounded-2xl' value={formData.date} type="date" name='date' onChange={handleChange} min={getCurrentDate()} required  />
+              <input className='focus:border-[3px] border-[3px] border-white focus:border-pink-400 focus:ring-pink-400 focus:outline-none px-4 py-2 rounded-2xl' value={formData.date ? new Date(formData.date).toISOString().split('T')[0] : ""}  type="date" name='date' onChange={handleChange} min={getCurrentDate()} required  />
           </div>
           <div className='flex flex-col gap-1'>
               <label htmlFor="desc" className=' font-semibold text-zinc-300 '>Description</label>
-              <textarea className='focus:border-[3px] border-[3px] border-white focus:border-pink-400 focus:ring-pink-400 focus:outline-none px-4 py-2 rounded-2xl' value={formData.desc} rows={6} type="text" name='desc' onChange={handleChange}  required />
+              <textarea className='focus:border-[3px] border-[3px] border-white focus:border-pink-400 focus:ring-pink-400 focus:outline-none px-4 py-2 rounded-2xl' value={formData.desc ||  ""} rows={6} type="text" name='desc' onChange={handleChange}  required />
           </div>
           <div className='flex flex-col gap-1'>
             <label htmlFor="image" className='bg-[#21262d] px-4 rounded-md py-1 w-fit cursor-pointer text-[#e3e3e3]'>Upload Image</label>
-            <input className='focus:border-[3px] hidden border-[3px] border-white focus:border-pink-400 focus:ring-pink-400 focus:outline-none px-4 py-2 rounded-2xl' type="file" name="image" id="image" accept="image/*" onChange={handleImageChange} required/>
+            <input className='w-0' type="file"  id="image" accept="image/*" name='image' onChange={handleImageChange} required/>
             <div className='flex gap-2 items-center'>
             {formData.image && <span className='bg-[#21262d] p-2 rounded-md text-white cursor-pointer w-fit' onClick={()=>setShowBackdrop(true)}>
               Preview

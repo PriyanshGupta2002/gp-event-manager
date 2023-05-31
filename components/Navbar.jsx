@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -11,6 +11,7 @@ const Navbar = () => {
   const isUserLoggenIn = !!session?.user;
   const [providers, setProviders] = useState(null);
   const [search, setSearch] = useState(false)
+  const searchInputRef = useRef()
   useEffect(() => {
     const setUpProviders = async () => {
       const res = await getProviders();
@@ -19,6 +20,12 @@ const Navbar = () => {
     setUpProviders();
   }, []);
 
+  const handleKeyDown=(e)=>{
+    if (e.key==="Enter") {
+      router.push(`/?search=${searchInputRef.current.value}`)
+      searchInputRef.current.value=""
+    }
+  }
   return (
     <nav className="flex  items-center justify-between p-4 custom-bg bg-opacity-20 backdrop-filter backdrop-blur-lg  sticky top-0 z-50">
 
@@ -28,10 +35,19 @@ const Navbar = () => {
 
       <div className={`flex items-center absolute left-3 ${search?"translate-y-0":"-translate-y-36"} md:hidden bg-[#222222]  rounded-xl w-48 sm:w-[300px] transition-transform ease-linear sm:left-[230px] duration-300 `}>
         <input
-          className="w-full bg-transparent p-2 text-sm placeholder:text-xs placeholder:text-[#efefef] Cborder-none outline-none h-10 rounded-md"
+          className="w-full text-white bg-transparent p-2 text-sm placeholder:text-xs placeholder:text-[#efefef] Cborder-none outline-none h-10 rounded-md"
           type="text"
           placeholder="Search here for events..."
+          ref={searchInputRef}
+          
         />
+        <button className="mr-2" onClick={()=>{
+          router.push(`/?search=${searchInputRef.current.value}`)
+          searchInputRef.current.value=""
+          setShowMenu(false)
+        }}>
+          🔎
+        </button>
         <button className="mr-3 font-medium cursor-pointer text-[#efefef]" onClick={()=>setSearch(false)}>
             X
         </button>
@@ -109,6 +125,8 @@ const Navbar = () => {
           className="w-full p-2 text-sm placeholder:font-semibold border-none outline-none placeholder:text-[#efefef] font-semibold  text-white  h-10 bg-transparent rounded-md"
           type="text"
           placeholder="Search here for amazing events..."
+          ref={searchInputRef}
+          onKeyDown={handleKeyDown}
         />
           <button className="mr-3 font-medium cursor-pointer text-white lg:hidden" onClick={()=>setSearch(false)}>
             X

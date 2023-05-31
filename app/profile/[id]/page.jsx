@@ -1,6 +1,7 @@
 "use client"
 import ContentWrapper from '@components/ContentWrapper'
 import Events from '@components/Events'
+import Loader from '@components/Loader'
 import NoEvents from '@components/NoEvents'
 import { useFetch } from '@hooks/useFetch'
 import axios from 'axios'
@@ -44,7 +45,7 @@ const page = () => {
     redirect('/')
   }
   if (status === "loading") {
-    return <h1 className="text-white text-center font-bold text-3xl my-6 ">Loading.....</h1>;
+    return <Loader/>;
   }
 
   const handleFollowUser = async()=>{
@@ -66,14 +67,13 @@ const page = () => {
   return (
     <section className=''>
       <div key={1} className={`wrapper flex flex-col gap-2 items-center justify-center ${randomProfileBackgroundColor}  h-[50vh]`}>
-                <Image
+               {data.image && <Image
                 src={data.image}
                 width={100}
                 height={100}
                 className='rounded-full'
-                loading='lazy'
                 alt="username"
-                />
+                />}
                 <span className='text-white font-semibold'>
                   {data?.username} ✅
                 </span>
@@ -92,7 +92,7 @@ const page = () => {
       </div>
       <ContentWrapper className="max-w-5xl flex flex-col gap-7 p-4" key={859}>
             <h2 className='text-white text-4xl font-bold blue_gradient '>
-              Welcome, {data?.username} to your personalized profile.
+              Welcome, <br className='md:hidden'/> {data?.username} <br className='md:hidden'/> to your personalized profile.
             </h2>
       </ContentWrapper>
             {/* <hr className='border-t border-gray-700 my-4' /> */}

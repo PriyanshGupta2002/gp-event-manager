@@ -3,9 +3,12 @@ import Image from 'next/image'
 import Link from 'next/link'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
+import ExpiredBadge from './ExpiredBadge'
+import { useSession } from 'next-auth/react'
 
 const EventItem = ({event,type}) => {
     const {name,desc,image,organisedBy,address,date} = event
+    const {data:session} = useSession()
     const router = useRouter()
      const eventDate = date ? new Date(date):new Date()
      const options = { day: 'numeric', month: 'long', year: 'numeric' };
@@ -23,9 +26,11 @@ const EventItem = ({event,type}) => {
         }
      }
   return (
-    <div className="w-full sm:w-[550px] md:w-[328px] flex flex-col gap-[15px] glassmorphism overflow-hidden rounded-xl">
+    <div className="w-full sm:w-[550px] md:w-[328px] relative flex flex-col gap-[15px] glassmorphism overflow-hidden rounded-xl">
+       {new Date() > eventDate && <ExpiredBadge/>}
       <Link href={`/eventDetail/${event._id}`}>
     <div className="top">
+     
        <img
         className='w-full object-cover md:h-52'
         src={image} 
@@ -94,8 +99,8 @@ const EventItem = ({event,type}) => {
         </Link>
       </button>
       
-      {type && <div className='flex items-center gap-4 p-2'>
-          <button className=' border-2 rounded-lg border-[#238636] hover:bg-transparent hover:text-[#238636] bg-[#238636] px-4 py-1 text-white'>Edit</button>
+      {type && event.organisedBy._id===session.user.id && <div className='flex items-center gap-4 p-2'>
+          <button className=' border-2 rounded-lg border-[#238636] hover:bg-transparent hover:text-[#238636] bg-[#238636] px-4 py-1 text-white' onClick={()=>router.push(`/edit/${event._id}`)}>Edit</button>
           <button className='border-2 rounded-lg border-red-600 text-red-500 px-2 py-1 hover:bg-red-600 hover:text-white' onClick={handleDeleteMeetup}>{isDeleting?"Deleting...":"Delete"}</button>
       </div> }
     </div>

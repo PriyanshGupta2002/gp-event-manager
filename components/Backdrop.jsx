@@ -1,7 +1,9 @@
 import React from 'react'
 
 const Backdrop = ({setShowBackdrop,image}) => {
-    const imageUrl = URL.createObjectURL(image)
+
+  const isImageUrl = typeof image === 'string' && image.startsWith('http');
+  const imageUrl = isImageUrl ? image : URL.createObjectURL(image);
   return (
     <div
     className='backdrop'
