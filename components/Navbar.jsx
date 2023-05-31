@@ -30,7 +30,7 @@ const Navbar = () => {
 
   const handleMobileSearch=()=>{
     router.push(`/?search=${searchTerm.current.value}`)
-    searchInputRef.current.value=""
+    searchTerm.current.value=""
   }
 
 
