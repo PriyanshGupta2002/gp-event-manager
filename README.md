@@ -39,5 +39,15 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ## Add Event Page
 ![screencapture-localhost-3000-addEvent-2023-05-25-03_33_16](https://github.com/PriyanshGupta2002/gp-event-manager/assets/86533169/1fa20d14-ac49-4e45-86ad-588375dca46f)
 
+## Event Detail Page
+![meetupDetailPage](https://github.com/PriyanshGupta2002/gp-event-manager/assets/86533169/1178d582-8db1-44b2-b4a3-e1bdd239c566)
+
+## Personal Profile Page
+![personalProfilePage](https://github.com/PriyanshGupta2002/gp-event-manager/assets/86533169/31c834f1-7174-4b01-98f6-4715acc18ddc)
+
+## Other User Profile Page
+![otherUsersProfilePage](https://github.com/PriyanshGupta2002/gp-event-manager/assets/86533169/123d7d31-9d56-4ff0-9e89-6877b8dc87b5)
+
+
 
 
