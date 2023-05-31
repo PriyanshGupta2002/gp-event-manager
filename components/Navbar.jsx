@@ -12,6 +12,7 @@ const Navbar = () => {
   const [providers, setProviders] = useState(null);
   const [search, setSearch] = useState(false)
   const searchInputRef = useRef()
+  const searchTerm = useRef()
   useEffect(() => {
     const setUpProviders = async () => {
       const res = await getProviders();
@@ -26,6 +27,13 @@ const Navbar = () => {
       searchInputRef.current.value=""
     }
   }
+
+  const handleMobileSearch=()=>{
+    router.push(`/?search=${searchTerm.current.value}`)
+    searchInputRef.current.value=""
+  }
+
+
   return (
     <nav className="flex  items-center justify-between p-4 custom-bg bg-opacity-20 backdrop-filter backdrop-blur-lg  sticky top-0 z-50">
 
@@ -38,14 +46,9 @@ const Navbar = () => {
           className="w-full text-white bg-transparent p-2 text-sm placeholder:text-xs placeholder:text-[#efefef] Cborder-none outline-none h-10 rounded-md"
           type="text"
           placeholder="Search here for events..."
-          ref={searchInputRef}
-          
+          ref={searchTerm}
         />
-        <button className="mr-2" onClick={()=>{
-          router.push(`/?search=${searchInputRef.current.value}`)
-          searchInputRef.current.value=""
-          setShowMenu(false)
-        }}>
+        <button className="mr-2" onClick={handleMobileSearch}>
           🔎
         </button>
         <button className="mr-3 font-medium cursor-pointer text-[#efefef]" onClick={()=>setSearch(false)}>

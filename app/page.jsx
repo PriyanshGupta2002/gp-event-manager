@@ -11,7 +11,7 @@ const home = () => {
 
   const [events, setEvents] = useState([])
   const searchParams = useSearchParams();
-  const searchTerm = searchParams.get('search');
+  const searchTerm = searchParams.get('search')?.toLowerCase();
   
 
   useEffect(() => {
@@ -19,7 +19,7 @@ const home = () => {
       const {data} = await axios.get('/api/meetups')
       if (searchTerm) {
         const filteredEvents = data?.filter((d)=>{
-          return d.name.includes(searchTerm) || d.desc.includes(searchTerm) || d.address.includes(searchTerm) || d?.organisedBy?.username?.includes(searchTerm)
+          return d.name.toLowerCase().includes(searchTerm) || d.desc.toLowerCase().includes(searchTerm) || d.address.toLowerCase().includes(searchTerm) || d?.organisedBy?.username?.toLowerCase().includes(searchTerm)
         })
         setEvents(filteredEvents)
       }else{
